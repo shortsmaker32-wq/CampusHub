@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampusHub — Durg College Prototype</title>
+<style>
+:root{--p:#5b36d9;--p2:#7b5ce6;--bg:#f6f5fb;--card:#fff;--text:#20202a;--muted:#777484;--line:#e9e6f2;--green:#168a59;--orange:#d97706}
+*{box-sizing:border-box}body{margin:0;background:#ddd;font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+.phone{max-width:430px;min-height:100vh;margin:auto;background:var(--bg);position:relative;overflow:hidden}
+header{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:22px 18px 18px;border-radius:0 0 24px 24px}
+.brand{font-size:23px;font-weight:800}.tag{font-size:12px;opacity:.9;margin-top:4px}
+main{padding:16px 15px 90px}.screen{display:none}.screen.active{display:block}
+h2{margin:6px 0 4px;font-size:21px}.sub{color:var(--muted);font-size:13px;margin-bottom:15px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:0 2px 8px #00000008}
+.service{min-height:110px;cursor:pointer}.icon{font-size:27px}.service b{display:block;margin-top:10px}.service small{color:var(--muted)}
+.wide{grid-column:1/-1}.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px 15px;background:var(--p);color:#fff;font-weight:700;margin-top:10px;cursor:pointer}.btn.alt{background:#eeeafb;color:var(--p)}.btn.green{background:var(--green)}
+.back{border:0;background:transparent;padding:0;color:#fff;font-size:14px;cursor:pointer;margin-bottom:10px}
+.item{display:flex;gap:12px;align-items:center}.thumb{width:52px;height:52px;border-radius:12px;background:#eeeafa;display:flex;align-items:center;justify-content:center;font-size:25px}
+.badge{font-size:11px;padding:4px 7px;border-radius:8px;background:#fff3dc;color:var(--orange);display:inline-block}.badge.green{background:#e5f7ef;color:var(--green)}
+.list{display:flex;flex-direction:column;gap:10px}.form label{font-size:12px;font-weight:700;display:block;margin:12px 0 5px}.form input,.form textarea,.form select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}.form textarea{min-height:75px;resize:vertical}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:430px;width:100%;height:68px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;z-index:5}.nav button{border:0;background:transparent;color:#777;font-size:11px;cursor:pointer}.nav button.active{color:var(--p);font-weight:800}.nav span{display:block;font-size:21px;margin-bottom:3px}
+.notice{border-left:4px solid var(--p);background:#fff;padding:12px;border-radius:10px;margin-bottom:9px}.notice b{font-size:13px}.notice p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#fff;border-radius:13px;padding:13px}.stat b{font-size:21px}.stat small{display:block;color:var(--muted)}
+.modal{position:fixed;inset:0;background:#0007;display:none;align-items:end;z-index:10}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:430px;margin:auto;padding:18px;border-radius:22px 22px 0 0}.close{float:right;border:0;background:#eee;border-radius:50%;width:30px;height:30px}
+</style>
+</head>
+<body>
+<div class="phone">
+<header id="header"><div class="brand">🏠 CAMPUSHUB</div><div class="tag">Your Campus, One Platform • Durg College Pilot</div></header>
+
+<main>
+<section id="home" class="screen active">
+<h2>Good morning 👋</h2><div class="sub">Govt. V.Y.T. PG Autonomous College, Durg</div>
+<div class="grid">
+<div class="card service wide" onclick="show('lost')"><div class="icon">🔎</div><b>Lost & Found</b><small>Report, search and recover items</small></div>
+<div class="card service" onclick="show('bazaar')"><div class="icon">📚</div><b>CampusBazaar</b><small>Buy • Sell • Exchange</small></div>
+<div class="card service" onclick="show('canteen')"><div class="icon">🍔</div><b>Canteen</b><small>Menu & pre-order</small></div>
+<div class="card service" onclick="show('hostel')"><div class="icon">🏠</div><b>Hostel</b><small>Complaints & services</small></div>
+<div class="card service" onclick="show('student')"><div class="icon">🛠️</div><b>Student Services</b><small>Printing, notes & help</small></div>
+<div class="card service" onclick="show('updates')"><div class="icon">📢</div><b>Campus Updates</b><small>Notices & opportunities</small></div>
+</div>
+<h2 style="margin-top:22px">Campus Updates</h2>
+<div class="notice"><b>📢 Prototype Pilot</b><p>CampusHub is being tested with students. This demo uses sample data.</p></div>
+<div class="notice"><b>🔎 Lost item?</b><p>Report it quickly so other students can help find it.</p></div>
+</section>
+
+<section id="lost" class="screen">
+<button class="back" onclick="show('home')">← Back</button><h2>🔎 Lost & Found</h2><div class="sub">A central place for items lost or found on campus.</div>
+<div class="grid">
+<div class="card service" onclick="show('reportLost')"><div class="icon">😟</div><b>I Lost Something</b><small>Report your lost item</small></div>
+<div class="card service" onclick="show('reportFound')"><div class="icon">🤝</div><b>I Found Something</b><small>Help return an item</small></div>
+<div class="card service" onclick="show('lostList')"><div class="icon">📋</div><b>Lost Items</b><small>Search reports</small></div>
+<div class="card service" onclick="show('foundList')"><div class="icon">📦</div><b>Found Items</b><small>Search found items</small></div>
+</div>
+<div class="card wide" style="margin-top:12px"><b>🔐 Safety first</b><p style="font-size:12px;color:#777">Contact details are not publicly displayed. Claims should be verified by an authorized admin before handover.</p></div>
+</section>
+
+<section id="reportLost" class="screen">
+<button class="back" onclick="show('lost')">← Back</button><h2>I Lost Something</h2><div class="sub">Sample report form for the prototype.</div>
+<form class="form" onsubmit="demoSubmit(event,'Lost report submitted')">
+<label>Item name *</label><input required placeholder="e.g. Black wallet">
+<label>Category *</label><select required><option value="">Select</option><option>ID / Document</option><option>Bag</option><option>Electronics</option><option>Books</option><option>Other</option></select>
+<label>Where did you lose it? *</label><input required placeholder="e.g. Library">
+<label>Date / approximate time</label><input type="datetime-local">
+<label>Description</label><textarea placeholder="Colour, identifying mark, etc."></textarea>
+<button class="btn">Submit Lost Report</button></form>
+</section>
+
+<section id="reportFound" class="screen">
+<button class="back" onclick="show('lost')">← Back</button><h2>I Found Something</h2><div class="sub">Help return an item without exposing sensitive information.</div>
+<form class="form" onsubmit="demoSubmit(event,'Found report submitted')">
+<label>Item name *</label><input required placeholder="e.g. Black wallet">
+<label>Where did you find it? *</label><input required placeholder="e.g. Near library">
+<label>Date / approximate time</label><input type="datetime-local">
+<label>Short description</label><textarea placeholder="Describe the item without revealing private details."></textarea>
+<button class="btn green">Submit Found Report</button></form>
+</section>
+
+<section id="lostList" class="screen"><button class="back" onclick="show('lost')">← Back</button><h2>Lost Items</h2><div class="sub">Sample data for demonstration.</div>
+<div class="list">
+<div class="card item"><div class="thumb">👛</div><div><b>Black Wallet</b><br><small>Near Library • 4:30 PM</small><br><span class="badge">New</span></div></div>
+<div class="card item"><div class="thumb">🪪</div><div><b>College ID Card</b><br><small>Main Building • 11:20 AM</small><br><span class="badge">Open</span></div></div>
+<div class="card item"><div class="thumb">🎒</div><div><b>Black Backpack</b><br><small>Ground • Yesterday</small><br><span class="badge">Open</span></div></div>
+</div></section>
+
+<section id="foundList" class="screen"><button class="back" onclick="show('lost')">← Back</button><h2>Found Items</h2><div class="sub">Sample data for demonstration.</div>
+<div class="list">
+<div class="card item"><div class="thumb">🎧</div><div><b>Black Earphones</b><br><small>Near Canteen • 2:10 PM</small><br><span class="badge green">Found</span></div></div>
+<div class="card item"><div class="thumb">🖊️</div><div><b>Silver Pen</b><br><small>Library • 11:00 AM</small><br><span class="badge green">Found</span></div></div>
+<div class="card item"><div class="thumb">🧮</div><div><b>Calculator</b><br><small>Room 203 • Yesterday</small><br><span class="badge green">Found</span></div></div>
+</div></section>
+
+<section id="bazaar" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>📚 CampusBazaar</h2><div class="sub">Student-to-student marketplace — sample prototype.</div>
+<button class="btn">＋ Sell / List an Item</button><div class="list" style="margin-top:12px">
+<div class="card item"><div class="thumb">📖</div><div><b>Biology Book</b><br><small>Good condition • ₹180</small><br><span class="badge green">Available</span></div></div>
+<div class="card item"><div class="thumb">🧮</div><div><b>Scientific Calculator</b><br><small>Good condition • ₹350</small><br><span class="badge green">Available</span></div></div>
+<div class="card item"><div class="thumb">📚</div><div><b>B.Sc. Notes</b><br><small>Semester 1 • ₹50</small><br><span class="badge green">Available</span></div></div>
+</div></section>
+
+<section id="canteen" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>🍔 Canteen</h2><div class="sub">Concept demo — actual ordering requires canteen/college approval.</div>
+<div class="list">
+<div class="card item"><div class="thumb">🥪</div><div><b>Poha</b><br><small>₹20 • Sample menu</small></div><button class="btn" style="width:auto;margin:0" onclick="alert('Demo: added to pickup order')">Add</button></div>
+<div class="card item"><div class="thumb">🥟</div><div><b>Samosa</b><br><small>₹10 • Sample menu</small></div><button class="btn" style="width:auto;margin:0" onclick="alert('Demo: added to pickup order')">Add</button></div>
+<div class="card item"><div class="thumb">☕</div><div><b>Tea</b><br><small>₹10 • Sample menu</small></div><button class="btn" style="width:auto;margin:0" onclick="alert('Demo: added to pickup order')">Add</button></div>
+</div><button class="btn">View Pickup Order</button></section>
+
+<section id="hostel" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>🏠 Hostel Services</h2><div class="sub">For hostel residents — sample workflows.</div>
+<div class="grid">
+<div class="card service" onclick="demo('Maintenance request')"><div class="icon">🔧</div><b>Maintenance</b><small>Water, electricity, room issues</small></div>
+<div class="card service" onclick="demo('Mess feedback')"><div class="icon">🍱</div><b>Mess</b><small>Menu & feedback</small></div>
+<div class="card service" onclick="demo('Laundry request')"><div class="icon">👕</div><b>Laundry</b><small>Request / status</small></div>
+<div class="card service" onclick="demo('Hostel notice')"><div class="icon">📢</div><b>Hostel Notices</b><small>Important updates</small></div>
+</div><div class="card" style="margin-top:12px"><b>Complaint Tracking</b><p style="font-size:12px;color:#777">Submitted → Under Review → In Progress → Resolved</p></div></section>
+
+<section id="student" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>🛠️ Student Services</h2><div class="sub">Services that students may need repeatedly.</div>
+<div class="grid">
+<div class="card service" onclick="demo('Printing')"><div class="icon">🖨️</div><b>Printing</b><small>Submit a print request</small></div>
+<div class="card service" onclick="demo('Notes')"><div class="icon">📝</div><b>Notes</b><small>Share / request notes</small></div>
+<div class="card service" onclick="demo('Study help')"><div class="icon">👨‍🏫</div><b>Study Help</b><small>Find peer support</small></div>
+<div class="card service" onclick="demo('Skill exchange')"><div class="icon">🤝</div><b>Skill Exchange</b><small>Learn & help</small></div>
+</div></section>
+
+<section id="updates" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>📢 Campus Updates</h2><div class="sub">Official updates should be posted only by authorized college/admin accounts.</div>
+<div class="notice"><b>📝 Exam / Academic Notice</b><p>Sample notice for prototype demonstration.</p></div>
+<div class="notice"><b>🏆 Competition</b><p>Sample campus opportunity.</p></div>
+<div class="notice"><b>🎉 College Event</b><p>Sample event announcement.</p></div>
+</section>
+
+<section id="admin" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>⚙️ Admin Dashboard</h2><div class="sub">Demo only — authorized staff/admin access required.</div>
+<div class="stats"><div class="stat"><b>15</b><small>Lost Reports</small></div><div class="stat"><b>9</b><small>Found Reports</small></div><div class="stat"><b>6</b><small>Possible Matches</small></div><div class="stat"><b>12</b><small>Open Requests</small></div></div>
+<div class="card" style="margin-top:12px"><b>Recent Lost & Found</b><p style="font-size:12px;color:#777">Black Wallet — Review</p><p style="font-size:12px;color:#777">College ID — Verify claim</p><p style="font-size:12px;color:#777">Earphones — Possible match</p></div>
+</section>
+</main>
+
+<div class="nav">
+<button class="active" onclick="show('home',this)"><span>⌂</span>Home</button>
+<button onclick="show('lost',this)"><span>🔎</span>Lost & Found</button>
+<button onclick="show('bazaar',this)"><span>📚</span>Bazaar</button>
+<button onclick="show('updates',this)"><span>📢</span>Updates</button>
+<button onclick="show('admin',this)"><span>⚙️</span>Admin</button>
+</div>
+</div>
+
+<script>
+function show(id,btn){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+ if(btn) btn.classList.add('active');
+ window.scrollTo(0,0);
+}
+function demo(x){alert('Prototype demo: '+x+' flow will be connected in the MVP.');}
+function demoSubmit(e,msg){e.preventDefault();alert(msg+'\\n\\nDemo mode: no real data was stored.');e.target.reset();}
+</script>
+</body>
+</html>
