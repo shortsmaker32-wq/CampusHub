@@ -1,9 +1,10 @@
+
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CampusHub — Durg College Prototype</title>
+<title>CampusHub — Durg College Pilot</title>
 <style>
 :root{--p:#5b36d9;--p2:#7b5ce6;--bg:#f6f5fb;--card:#fff;--text:#20202a;--muted:#777484;--line:#e9e6f2;--green:#168a59;--orange:#d97706}
 *{box-sizing:border-box}body{margin:0;background:#ddd;font-family:Arial,Helvetica,sans-serif;color:var(--text)}
@@ -14,112 +15,136 @@ main{padding:16px 15px 90px}.screen{display:none}.screen.active{display:block}
 h2{margin:6px 0 4px;font-size:21px}.sub{color:var(--muted);font-size:13px;margin-bottom:15px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:0 2px 8px #00000008}
 .service{min-height:110px;cursor:pointer}.icon{font-size:27px}.service b{display:block;margin-top:10px}.service small{color:var(--muted)}
-.wide{grid-column:1/-1}.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px 15px;background:var(--p);color:#fff;font-weight:700;margin-top:10px;cursor:pointer}.btn.alt{background:#eeeafb;color:var(--p)}.btn.green{background:var(--green)}
-.back{border:0;background:transparent;padding:0;color:#fff;font-size:14px;cursor:pointer;margin-bottom:10px}
-.item{display:flex;gap:12px;align-items:center}.thumb{width:52px;height:52px;border-radius:12px;background:#eeeafa;display:flex;align-items:center;justify-content:center;font-size:25px}
+.wide{grid-column:1/-1}.btn{display:block;width:100%;border:0;border-radius:12px;padding:13px 15px;background:var(--p);color:#fff;font-weight:700;margin-top:10px;cursor:pointer}.btn.green{background:var(--green)}.btn.small{width:auto;display:inline-block;padding:9px 11px;margin:5px 3px 0 0}
+.back{border:0;background:transparent;padding:0;color:var(--p);font-size:14px;cursor:pointer;margin-bottom:10px}
+.item{display:flex;gap:12px;align-items:center}.thumb{width:52px;height:52px;border-radius:12px;background:#eeeafa;display:flex;align-items:center;justify-content:center;font-size:25px;flex:none}
 .badge{font-size:11px;padding:4px 7px;border-radius:8px;background:#fff3dc;color:var(--orange);display:inline-block}.badge.green{background:#e5f7ef;color:var(--green)}
 .list{display:flex;flex-direction:column;gap:10px}.form label{font-size:12px;font-weight:700;display:block;margin:12px 0 5px}.form input,.form textarea,.form select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}.form textarea{min-height:75px;resize:vertical}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:430px;width:100%;height:68px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;z-index:5}.nav button{border:0;background:transparent;color:#777;font-size:11px;cursor:pointer}.nav button.active{color:var(--p);font-weight:800}.nav span{display:block;font-size:21px;margin-bottom:3px}
 .notice{border-left:4px solid var(--p);background:#fff;padding:12px;border-radius:10px;margin-bottom:9px}.notice b{font-size:13px}.notice p{margin:5px 0 0;color:var(--muted);font-size:12px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#fff;border-radius:13px;padding:13px}.stat b{font-size:21px}.stat small{display:block;color:var(--muted)}
-.modal{position:fixed;inset:0;background:#0007;display:none;align-items:end;z-index:10}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:430px;margin:auto;padding:18px;border-radius:22px 22px 0 0}.close{float:right;border:0;background:#eee;border-radius:50%;width:30px;height:30px}
+.price{font-weight:800;color:var(--p)}
 </style>
 </head>
 <body>
 <div class="phone">
-<header id="header"><div class="brand">🏠 CAMPUSHUB</div><div class="tag">Your Campus, One Platform • Durg College Pilot</div></header>
-
+<header><div class="brand">🏠 CAMPUSHUB</div><div class="tag">Your Campus, One Platform • Durg College Pilot</div></header>
 <main>
+
 <section id="home" class="screen active">
 <h2>Good morning 👋</h2><div class="sub">Govt. V.Y.T. PG Autonomous College, Durg</div>
 <div class="grid">
 <div class="card service wide" onclick="show('lost')"><div class="icon">🔎</div><b>Lost & Found</b><small>Report, search and recover items</small></div>
 <div class="card service" onclick="show('bazaar')"><div class="icon">📚</div><b>CampusBazaar</b><small>Buy • Sell • Exchange</small></div>
-<div class="card service" onclick="show('canteen')"><div class="icon">🍔</div><b>Canteen</b><small>Menu & pre-order</small></div>
-<div class="card service" onclick="show('hostel')"><div class="icon">🏠</div><b>Hostel</b><small>Complaints & services</small></div>
-<div class="card service" onclick="show('student')"><div class="icon">🛠️</div><b>Student Services</b><small>Printing, notes & help</small></div>
+<div class="card service" onclick="show('canteen')"><div class="icon">🍔</div><b>Canteen</b><small>Menu & pickup cart</small></div>
+<div class="card service" onclick="show('hostel')"><div class="icon">🏠</div><b>Hostel</b><small>Requests & services</small></div>
+<div class="card service" onclick="show('student')"><div class="icon">🛠️</div><b>Student Services</b><small>Requests & help</small></div>
 <div class="card service" onclick="show('updates')"><div class="icon">📢</div><b>Campus Updates</b><small>Notices & opportunities</small></div>
 </div>
 <h2 style="margin-top:22px">Campus Updates</h2>
-<div class="notice"><b>📢 Prototype Pilot</b><p>CampusHub is being tested with students. This demo uses sample data.</p></div>
+<div class="notice"><b>📢 Prototype Pilot</b><p>CampusHub is being tested with students. Some features use local demo data.</p></div>
 <div class="notice"><b>🔎 Lost item?</b><p>Report it quickly so other students can help find it.</p></div>
 </section>
 
 <section id="lost" class="screen">
-<button class="back" onclick="show('home')">← Back</button><h2>🔎 Lost & Found</h2><div class="sub">A central place for items lost or found on campus.</div>
+<button class="back" onclick="show('home')">← Back</button><h2>🔎 Lost & Found</h2><div class="sub">Report items and search reports.</div>
 <div class="grid">
-<div class="card service" onclick="show('reportLost')"><div class="icon">😟</div><b>I Lost Something</b><small>Report your lost item</small></div>
+<div class="card service" onclick="show('reportLost')"><div class="icon">😟</div><b>I Lost Something</b><small>Create a report</small></div>
 <div class="card service" onclick="show('reportFound')"><div class="icon">🤝</div><b>I Found Something</b><small>Help return an item</small></div>
 <div class="card service" onclick="show('lostList')"><div class="icon">📋</div><b>Lost Items</b><small>Search reports</small></div>
 <div class="card service" onclick="show('foundList')"><div class="icon">📦</div><b>Found Items</b><small>Search found items</small></div>
 </div>
-<div class="card wide" style="margin-top:12px"><b>🔐 Safety first</b><p style="font-size:12px;color:#777">Contact details are not publicly displayed. Claims should be verified by an authorized admin before handover.</p></div>
+<div class="card wide" style="margin-top:12px"><b>🔐 Safety first</b><p style="font-size:12px;color:#777">Do not publish phone numbers, Aadhaar or sensitive ID details. Claims should be verified before handover.</p></div>
 </section>
 
 <section id="reportLost" class="screen">
-<button class="back" onclick="show('lost')">← Back</button><h2>I Lost Something</h2><div class="sub">Sample report form for the prototype.</div>
-<form class="form" onsubmit="demoSubmit(event,'Lost report submitted')">
-<label>Item name *</label><input required placeholder="e.g. Black wallet">
-<label>Category *</label><select required><option value="">Select</option><option>ID / Document</option><option>Bag</option><option>Electronics</option><option>Books</option><option>Other</option></select>
-<label>Where did you lose it? *</label><input required placeholder="e.g. Library">
-<label>Date / approximate time</label><input type="datetime-local">
-<label>Description</label><textarea placeholder="Colour, identifying mark, etc."></textarea>
+<button class="back" onclick="show('lost')">← Back</button><h2>I Lost Something</h2><div class="sub">Your report is saved in this browser for the prototype.</div>
+<form class="form" onsubmit="submitLost(event)">
+<label>Item name *</label><input id="lostName" required placeholder="e.g. Black wallet">
+<label>Category *</label><select id="lostCat" required><option value="">Select</option><option>ID / Document</option><option>Bag</option><option>Electronics</option><option>Books</option><option>Other</option></select>
+<label>Where did you lose it? *</label><input id="lostPlace" required placeholder="e.g. Library">
+<label>Date / approximate time</label><input id="lostTime" type="datetime-local">
+<label>Description</label><textarea id="lostDesc" placeholder="Colour, identifying mark, etc."></textarea>
 <button class="btn">Submit Lost Report</button></form>
 </section>
 
 <section id="reportFound" class="screen">
-<button class="back" onclick="show('lost')">← Back</button><h2>I Found Something</h2><div class="sub">Help return an item without exposing sensitive information.</div>
-<form class="form" onsubmit="demoSubmit(event,'Found report submitted')">
-<label>Item name *</label><input required placeholder="e.g. Black wallet">
-<label>Where did you find it? *</label><input required placeholder="e.g. Near library">
-<label>Date / approximate time</label><input type="datetime-local">
-<label>Short description</label><textarea placeholder="Describe the item without revealing private details."></textarea>
+<button class="back" onclick="show('lost')">← Back</button><h2>I Found Something</h2><div class="sub">Do not reveal sensitive identifying information publicly.</div>
+<form class="form" onsubmit="submitFound(event)">
+<label>Item name *</label><input id="foundName" required placeholder="e.g. Black wallet">
+<label>Where did you find it? *</label><input id="foundPlace" required placeholder="e.g. Near library">
+<label>Date / approximate time</label><input id="foundTime" type="datetime-local">
+<label>Short description</label><textarea id="foundDesc" placeholder="Describe the item safely."></textarea>
 <button class="btn green">Submit Found Report</button></form>
 </section>
 
-<section id="lostList" class="screen"><button class="back" onclick="show('lost')">← Back</button><h2>Lost Items</h2><div class="sub">Sample data for demonstration.</div>
+<section id="lostList" class="screen"><button class="back" onclick="show('lost')">← Back</button><h2>Lost Items</h2><div class="sub">Sample + reports created on this device.</div><div id="lostItems" class="list"></div></section>
+<section id="foundList" class="screen"><button class="back" onclick="show('lost')">← Back</button><h2>Found Items</h2><div class="sub">Sample + reports created on this device.</div><div id="foundItems" class="list"></div></section>
+
+<section id="bazaar" class="screen">
+<button class="back" onclick="show('home')">← Back</button><h2>📚 CampusBazaar</h2><div class="sub">Student-to-student marketplace prototype.</div>
+<button class="btn" onclick="show('sell')">＋ Sell / List an Item</button>
+<div id="bazaarList" class="list" style="margin-top:12px"></div>
+</section>
+
+<section id="sell" class="screen">
+<button class="back" onclick="show('bazaar')">← Back</button><h2>List an Item</h2><div class="sub">Listing is stored locally in this prototype.</div>
+<form class="form" onsubmit="submitBazaar(event)">
+<label>Item name *</label><input id="saleName" required placeholder="e.g. Biology Book">
+<label>Price (₹) *</label><input id="salePrice" type="number" min="0" required placeholder="180">
+<label>Condition</label><select id="saleCondition"><option>Good</option><option>Like New</option><option>Used</option></select>
+<label>Description</label><textarea id="saleDesc" placeholder="Short description"></textarea>
+<button class="btn">Publish Listing</button></form>
+</section>
+
+<section id="canteen" class="screen">
+<button class="back" onclick="show('home')">← Back</button><h2>🍔 Canteen</h2><div class="sub">Prototype menu and pickup cart.</div>
 <div class="list">
-<div class="card item"><div class="thumb">👛</div><div><b>Black Wallet</b><br><small>Near Library • 4:30 PM</small><br><span class="badge">New</span></div></div>
-<div class="card item"><div class="thumb">🪪</div><div><b>College ID Card</b><br><small>Main Building • 11:20 AM</small><br><span class="badge">Open</span></div></div>
-<div class="card item"><div class="thumb">🎒</div><div><b>Black Backpack</b><br><small>Ground • Yesterday</small><br><span class="badge">Open</span></div></div>
-</div></section>
+<div class="card item"><div class="thumb">🥪</div><div style="flex:1"><b>Poha</b><br><small>₹20</small></div><button class="btn small" onclick="addCart('Poha',20)">Add</button></div>
+<div class="card item"><div class="thumb">🥟</div><div style="flex:1"><b>Samosa</b><br><small>₹10</small></div><button class="btn small" onclick="addCart('Samosa',10)">Add</button></div>
+<div class="card item"><div class="thumb">☕</div><div style="flex:1"><b>Tea</b><br><small>₹10</small></div><button class="btn small" onclick="addCart('Tea',10)">Add</button></div>
+</div>
+<div class="card" style="margin-top:12px"><b>🛒 Pickup Cart</b><div id="cartBox" style="margin-top:8px"></div><button class="btn green" onclick="placeOrder()">Place Pickup Request</button></div>
+</section>
 
-<section id="foundList" class="screen"><button class="back" onclick="show('lost')">← Back</button><h2>Found Items</h2><div class="sub">Sample data for demonstration.</div>
-<div class="list">
-<div class="card item"><div class="thumb">🎧</div><div><b>Black Earphones</b><br><small>Near Canteen • 2:10 PM</small><br><span class="badge green">Found</span></div></div>
-<div class="card item"><div class="thumb">🖊️</div><div><b>Silver Pen</b><br><small>Library • 11:00 AM</small><br><span class="badge green">Found</span></div></div>
-<div class="card item"><div class="thumb">🧮</div><div><b>Calculator</b><br><small>Room 203 • Yesterday</small><br><span class="badge green">Found</span></div></div>
-</div></section>
-
-<section id="bazaar" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>📚 CampusBazaar</h2><div class="sub">Student-to-student marketplace — sample prototype.</div>
-<button class="btn">＋ Sell / List an Item</button><div class="list" style="margin-top:12px">
-<div class="card item"><div class="thumb">📖</div><div><b>Biology Book</b><br><small>Good condition • ₹180</small><br><span class="badge green">Available</span></div></div>
-<div class="card item"><div class="thumb">🧮</div><div><b>Scientific Calculator</b><br><small>Good condition • ₹350</small><br><span class="badge green">Available</span></div></div>
-<div class="card item"><div class="thumb">📚</div><div><b>B.Sc. Notes</b><br><small>Semester 1 • ₹50</small><br><span class="badge green">Available</span></div></div>
-</div></section>
-
-<section id="canteen" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>🍔 Canteen</h2><div class="sub">Concept demo — actual ordering requires canteen/college approval.</div>
-<div class="list">
-<div class="card item"><div class="thumb">🥪</div><div><b>Poha</b><br><small>₹20 • Sample menu</small></div><button class="btn" style="width:auto;margin:0" onclick="alert('Demo: added to pickup order')">Add</button></div>
-<div class="card item"><div class="thumb">🥟</div><div><b>Samosa</b><br><small>₹10 • Sample menu</small></div><button class="btn" style="width:auto;margin:0" onclick="alert('Demo: added to pickup order')">Add</button></div>
-<div class="card item"><div class="thumb">☕</div><div><b>Tea</b><br><small>₹10 • Sample menu</small></div><button class="btn" style="width:auto;margin:0" onclick="alert('Demo: added to pickup order')">Add</button></div>
-</div><button class="btn">View Pickup Order</button></section>
-
-<section id="hostel" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>🏠 Hostel Services</h2><div class="sub">For hostel residents — sample workflows.</div>
+<section id="hostel" class="screen">
+<button class="back" onclick="show('home')">← Back</button><h2>🏠 Hostel Services</h2><div class="sub">Submit a simple hostel service request.</div>
 <div class="grid">
-<div class="card service" onclick="demo('Maintenance request')"><div class="icon">🔧</div><b>Maintenance</b><small>Water, electricity, room issues</small></div>
-<div class="card service" onclick="demo('Mess feedback')"><div class="icon">🍱</div><b>Mess</b><small>Menu & feedback</small></div>
-<div class="card service" onclick="demo('Laundry request')"><div class="icon">👕</div><b>Laundry</b><small>Request / status</small></div>
-<div class="card service" onclick="demo('Hostel notice')"><div class="icon">📢</div><b>Hostel Notices</b><small>Important updates</small></div>
-</div><div class="card" style="margin-top:12px"><b>Complaint Tracking</b><p style="font-size:12px;color:#777">Submitted → Under Review → In Progress → Resolved</p></div></section>
+<div class="card service" onclick="openRequest('Maintenance')"><div class="icon">🔧</div><b>Maintenance</b><small>Water, electricity, room issues</small></div>
+<div class="card service" onclick="openRequest('Mess Feedback')"><div class="icon">🍱</div><b>Mess</b><small>Feedback / issue</small></div>
+<div class="card service" onclick="openRequest('Laundry')"><div class="icon">👕</div><b>Laundry</b><small>Request / status</small></div>
+<div class="card service" onclick="show('hostelNotices')"><div class="icon">📢</div><b>Hostel Notices</b><small>Important updates</small></div>
+</div>
+<div class="card" style="margin-top:12px"><b>Complaint Tracking</b><div id="requestsBox" style="margin-top:8px"></div></div>
+</section>
 
-<section id="student" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>🛠️ Student Services</h2><div class="sub">Services that students may need repeatedly.</div>
+<section id="hostelNotices" class="screen"><button class="back" onclick="show('hostel')">← Back</button><h2>📢 Hostel Notices</h2><div class="notice"><b>Mess timing</b><p>Sample notice for prototype demonstration.</p></div><div class="notice"><b>Maintenance</b><p>Report room issues through CampusHub.</p></div></section>
+
+<section id="request" class="screen">
+<button class="back" onclick="show('hostel')">← Back</button><h2 id="requestTitle">Service Request</h2><div class="sub">This request is saved locally in the prototype.</div>
+<form class="form" onsubmit="submitRequest(event)">
+<label>Room / Block</label><input id="reqRoom" placeholder="e.g. Hostel A, Room 12">
+<label>Details *</label><textarea id="reqDetails" required placeholder="Describe the issue/request"></textarea>
+<button class="btn">Submit Request</button></form>
+</section>
+
+<section id="student" class="screen">
+<button class="back" onclick="show('home')">← Back</button><h2>🛠️ Student Services</h2><div class="sub">Useful student workflows — prototype version.</div>
 <div class="grid">
-<div class="card service" onclick="demo('Printing')"><div class="icon">🖨️</div><b>Printing</b><small>Submit a print request</small></div>
-<div class="card service" onclick="demo('Notes')"><div class="icon">📝</div><b>Notes</b><small>Share / request notes</small></div>
-<div class="card service" onclick="demo('Study help')"><div class="icon">👨‍🏫</div><b>Study Help</b><small>Find peer support</small></div>
-<div class="card service" onclick="demo('Skill exchange')"><div class="icon">🤝</div><b>Skill Exchange</b><small>Learn & help</small></div>
-</div></section>
+<div class="card service" onclick="openStudent('Printing')"><div class="icon">🖨️</div><b>Printing</b><small>Submit a print request</small></div>
+<div class="card service" onclick="openStudent('Notes')"><div class="icon">📝</div><b>Notes</b><small>Request/share notes</small></div>
+<div class="card service" onclick="openStudent('Study Help')"><div class="icon">👨‍🏫</div><b>Study Help</b><small>Request peer help</small></div>
+<div class="card service" onclick="openStudent('Skill Exchange')"><div class="icon">🤝</div><b>Skill Exchange</b><small>Offer/request a skill</small></div>
+</div>
+<div class="card" style="margin-top:12px"><b>My Requests</b><div id="studentBox"></div></div>
+</section>
+
+<section id="studentRequest" class="screen">
+<button class="back" onclick="show('student')">← Back</button><h2 id="studentTitle">Student Request</h2><div class="sub">Saved locally for this prototype.</div>
+<form class="form" onsubmit="submitStudent(event)">
+<label>Your request *</label><textarea id="studentDetails" required placeholder="What do you need?"></textarea>
+<button class="btn">Submit Request</button></form>
+</section>
 
 <section id="updates" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>📢 Campus Updates</h2><div class="sub">Official updates should be posted only by authorized college/admin accounts.</div>
 <div class="notice"><b>📝 Exam / Academic Notice</b><p>Sample notice for prototype demonstration.</p></div>
@@ -128,8 +153,8 @@ h2{margin:6px 0 4px;font-size:21px}.sub{color:var(--muted);font-size:13px;margin
 </section>
 
 <section id="admin" class="screen"><button class="back" onclick="show('home')">← Back</button><h2>⚙️ Admin Dashboard</h2><div class="sub">Demo only — authorized staff/admin access required.</div>
-<div class="stats"><div class="stat"><b>15</b><small>Lost Reports</small></div><div class="stat"><b>9</b><small>Found Reports</small></div><div class="stat"><b>6</b><small>Possible Matches</small></div><div class="stat"><b>12</b><small>Open Requests</small></div></div>
-<div class="card" style="margin-top:12px"><b>Recent Lost & Found</b><p style="font-size:12px;color:#777">Black Wallet — Review</p><p style="font-size:12px;color:#777">College ID — Verify claim</p><p style="font-size:12px;color:#777">Earphones — Possible match</p></div>
+<div class="stats"><div class="stat"><b id="lostCount">0</b><small>Lost Reports</small></div><div class="stat"><b id="foundCount">0</b><small>Found Reports</small></div><div class="stat"><b id="saleCount">0</b><small>Bazaar Listings</small></div><div class="stat"><b id="requestCount">0</b><small>Open Requests</small></div></div>
+<div class="card" style="margin-top:12px"><b>Prototype status</b><p style="font-size:12px;color:#777">Data created on this device is stored in the browser. A shared online database will be added in the next backend version.</p></div>
 </section>
 </main>
 
@@ -143,16 +168,39 @@ h2{margin:6px 0 4px;font-size:21px}.sub{color:var(--muted);font-size:13px;margin
 </div>
 
 <script>
+const get=(k,d=[])=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d));
+const set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let cart=get('campus_cart',[]),requestType='',studentType='';
+
 function show(id,btn){
- document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
- if(btn) btn.classList.add('active');
- window.scrollTo(0,0);
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+if(btn)btn.classList.add('active');renderAll();window.scrollTo(0,0);
 }
-function demo(x){alert('Prototype demo: '+x+' flow will be connected in the MVP.');}
-function demoSubmit(e,msg){e.preventDefault();alert(msg+'\\n\\nDemo mode: no real data was stored.');e.target.reset();}
+function submitLost(e){e.preventDefault();let a=get('lostReports');a.push({name:lostName.value,cat:lostCat.value,place:lostPlace.value,time:lostTime.value,desc:lostDesc.value,status:'Open'});set('lostReports',a);e.target.reset();alert('✅ Lost report saved in this browser.');show('lostList')}
+function submitFound(e){e.preventDefault();let a=get('foundReports');a.push({name:foundName.value,place:foundPlace.value,time:foundTime.value,desc:foundDesc.value,status:'Found'});set('foundReports',a);e.target.reset();alert('✅ Found report saved in this browser.');show('foundList')}
+function renderLostFound(){
+const sl=[{name:'Black Wallet',place:'Near Library',time:'4:30 PM',status:'New'},{name:'College ID Card',place:'Main Building',time:'11:20 AM',status:'Open'},{name:'Black Backpack',place:'Ground',time:'Yesterday',status:'Open'}];
+const sf=[{name:'Black Earphones',place:'Near Canteen',time:'2:10 PM',status:'Found'},{name:'Silver Pen',place:'Library',time:'11:00 AM',status:'Found'},{name:'Calculator',place:'Room 203',time:'Yesterday',status:'Found'}];
+lostItems.innerHTML=sl.concat(get('lostReports')).map(x=>`<div class="card item"><div class="thumb">👛</div><div><b>${safe(x.name)}</b><br><small>${safe(x.place)} • ${safe(x.time||'')}</small><br><span class="badge">${safe(x.status)}</span></div></div>`).join('');
+foundItems.innerHTML=sf.concat(get('foundReports')).map(x=>`<div class="card item"><div class="thumb">📦</div><div><b>${safe(x.name)}</b><br><small>${safe(x.place)} • ${safe(x.time||'')}</small><br><span class="badge green">${safe(x.status)}</span></div></div>`).join('');
+}
+function submitBazaar(e){e.preventDefault();let a=get('bazaar');a.push({name:saleName.value,price:salePrice.value,condition:saleCondition.value,desc:saleDesc.value});set('bazaar',a);e.target.reset();alert('✅ Listing published on this device.');show('bazaar')}
+function renderBazaar(){const s=[{name:'Biology Book',price:180,condition:'Good'},{name:'Scientific Calculator',price:350,condition:'Good'},{name:'B.Sc. Notes',price:50,condition:'Used'}];bazaarList.innerHTML=s.concat(get('bazaar')).map(x=>`<div class="card item"><div class="thumb">📚</div><div style="flex:1"><b>${safe(x.name)}</b><br><small>${safe(x.condition)} • <span class="price">₹${safe(x.price)}</span></small><br><small>${safe(x.desc||'Campus listing')}</small></div><button class="btn small" onclick="alert('Demo: buyer request started')">Interested</button></div>`).join('')}
+function addCart(name,price){cart.push({name,price});set('campus_cart',cart);renderCart();alert(name+' added to pickup cart.')}
+function renderCart(){cartBox.innerHTML=cart.length?cart.map((x,i)=>`${i+1}. ${safe(x.name)} — ₹${x.price}`).join('<br>')+`<hr><b>Total: ₹${cart.reduce((s,x)=>s+x.price,0)}</b>`:'<span style="color:#777">Cart is empty.</span>'}
+function placeOrder(){if(!cart.length){alert('Cart is empty.');return}alert('✅ Pickup request created for prototype.');cart=[];set('campus_cart',cart);renderCart()}
+function openRequest(t){requestType=t;requestTitle.textContent=t+' Request';show('request')}
+function submitRequest(e){e.preventDefault();let a=get('hostelRequests');a.push({type:requestType,room:reqRoom.value,details:reqDetails.value,status:'Submitted'});set('hostelRequests',a);e.target.reset();alert('✅ '+requestType+' request submitted.');show('hostel')}
+function renderRequests(){let a=get('hostelRequests');requestsBox.innerHTML=a.length?a.map(x=>`<p style="font-size:12px"><b>${safe(x.type)}</b> — ${safe(x.room||'')}</p><span class="badge">${safe(x.status)}</span>`).join(''):'<span style="color:#777;font-size:12px">No requests yet.</span>'}
+function openStudent(t){studentType=t;studentTitle.textContent=t+' Request';show('studentRequest')}
+function submitStudent(e){e.preventDefault();let a=get('studentRequests');a.push({type:studentType,details:studentDetails.value,status:'Submitted'});set('studentRequests',a);e.target.reset();alert('✅ '+studentType+' request submitted.');show('student')}
+function renderStudent(){let a=get('studentRequests');studentBox.innerHTML=a.length?a.map(x=>`<p style="font-size:12px"><b>${safe(x.type)}</b><br>${safe(x.details)}</p><span class="badge">${safe(x.status)}</span>`).join(''):'<span style="color:#777;font-size:12px">No requests yet.</span>'}
+function renderAdmin(){lostCount.textContent=get('lostReports').length;foundCount.textContent=get('foundReports').length;saleCount.textContent=get('bazaar').length;requestCount.textContent=get('hostelRequests').length+get('studentRequests').length}
+function safe(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function renderAll(){renderLostFound();renderBazaar();renderCart();renderRequests();renderStudent();renderAdmin()}
+renderAll();
 </script>
 </body>
 </html>
-<!-- CampusHub -->
